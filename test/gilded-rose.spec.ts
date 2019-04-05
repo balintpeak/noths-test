@@ -58,13 +58,6 @@ describe('Gilded Rose', function (): void {
         })
     })
 
-    it('should never increase quality above 50', function (): void {
-        const gildedRose = new GildedRose([new Item('Aged Brie', 10, 50)])
-        const updatedItems = gildedRose.updateQuality()
-
-        expect(updatedItems[0].quality).to.equal(50)
-    })
-
     describe('Sulfuras', function (): void {
         it('should not change quality when sellin is positive', function (): void {
             const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', 10, 80)])
