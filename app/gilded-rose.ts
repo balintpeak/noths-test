@@ -41,6 +41,11 @@ export class GildedRose {
 
         return GildedRose.getValidQuality(updatedQuality)
     }
+
+    public static updateAgedBrieQuality (quality: number): number {
+        const updatedQuality = quality + 1
+
+        return GildedRose.getValidQuality(updatedQuality)
     }
 
     public static updateQualityForItem (item: Item): Item {
@@ -48,7 +53,12 @@ export class GildedRose {
 
         if (!item.name.includes('Sulfuras')) {
             sellIn = GildedRose.updateSellIn(sellIn)
-            quality = GildedRose.updateGenericQuality(sellIn, quality)
+
+            if (item.name.includes('Aged Brie')) {
+                quality = GildedRose.updateAgedBrieQuality(quality)
+            } else {
+                quality = GildedRose.updateGenericQuality(sellIn, quality)
+            }
         }
 
         return ({
