@@ -13,7 +13,7 @@ describe('Gilded Rose', function (): void {
             const updatedItems = gildedRose.updateQuality()
 
             expect(updatedItems[0].sellIn).to.equal(0)
-            expect(updatedItems[0].sellIn).to.equal(-1)
+            expect(updatedItems[1].sellIn).to.equal(-1)
         })
 
         it('should decrease quality by one, when the sell by date has not yet passed', function (): void {
@@ -33,13 +33,13 @@ describe('Gilded Rose', function (): void {
             expect(updatedItems[0].quality).to.equal(18)
             expect(updatedItems[1].quality).to.equal(18)
         })
-    })
 
-    it('should never have an item with negative quality', function (): void {
-        const gildedRose = new GildedRose([new Item('generic item', 10, 0)])
-        const updatedItems = gildedRose.updateQuality()
+        it('should never have an item with negative quality', function (): void {
+            const gildedRose = new GildedRose([new Item('generic item', 10, 0)])
+            const updatedItems = gildedRose.updateQuality()
 
-        expect(updatedItems[0].quality).to.equal(0)
+            expect(updatedItems[0].quality).to.equal(0)
+        })
     })
 
     it('should increase quality of "Aged Brie"', function (): void {
