@@ -26,9 +26,7 @@ export class GildedRose {
 
         if (validQuality < 0) {
             validQuality = 0
-        }
-
-        if (validQuality > 50) {
+        } else if (validQuality > 50) {
             validQuality = 50
         }
 
