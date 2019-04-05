@@ -4,11 +4,35 @@ import { expect } from 'chai'
 import { Item, GildedRose } from '../app/gilded-rose'
 
 describe('Gilded Rose', function (): void {
-    it('should degrade quality twice as fast, once the sell by date has passed', function (): void {
-        const gildedRose = new GildedRose([new Item('generic item', 0, 20)])
-        const updatedItems = gildedRose.updateQuality()
+    describe('Generic item', function (): void {
+        it('should decrease sellin by one', function (): void {
+            const gildedRose = new GildedRose([
+                new Item('generic item', 1, 20),
+                new Item('generic item', 0, 20),
+            ])
+            const updatedItems = gildedRose.updateQuality()
 
-        expect(updatedItems[0].quality).to.equal(18)
+            expect(updatedItems[0].sellIn).to.equal(0)
+            expect(updatedItems[0].sellIn).to.equal(-1)
+        })
+
+        it('should decrease quality by one, when the sell by date has not yet passed', function (): void {
+            const gildedRose = new GildedRose([new Item('generic item', 2, 20)])
+            const updatedItems = gildedRose.updateQuality()
+
+            expect(updatedItems[0].quality).to.equal(19)
+        })
+
+        it('should decrease quality twice as fast, once the sell by date has passed', function (): void {
+            const gildedRose = new GildedRose([
+                new Item('generic item', 0, 20),
+                new Item('generic item', -1, 20),
+            ])
+            const updatedItems = gildedRose.updateQuality()
+
+            expect(updatedItems[0].quality).to.equal(18)
+            expect(updatedItems[1].quality).to.equal(18)
+        })
     })
 
     it('should never have an item with negative quality', function (): void {
