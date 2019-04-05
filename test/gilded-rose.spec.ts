@@ -11,6 +11,13 @@ describe('Gilded Rose', function (): void {
         expect(updatedItems[0].quality).to.equal(18)
     })
 
+    it('should never have an item with negative quality', function (): void {
+        const gildedRose = new GildedRose([new Item('generic item', 10, 0)])
+        const updatedItems = gildedRose.updateQuality()
+
+        expect(updatedItems[0].quality).to.equal(0)
+    })
+
     it('should have the original tests pass (golden-master-text-test)', function (): void {
         const items = [
             new Item('+5 Dexterity Vest', 10, 20),
