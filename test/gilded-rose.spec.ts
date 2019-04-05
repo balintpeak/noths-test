@@ -55,6 +55,48 @@ describe('Gilded Rose', function (): void {
         })
     })
 
+    describe('Backstage passes', function (): void {
+        it('should increase quality by 1 when sellin is bigger than 10', function (): void {
+            const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 11, 20)])
+            const updatedItems = gildedRose.updateQuality()
+
+            expect(updatedItems[0].quality).to.equal(21)
+        })
+
+        it('should increase quality by 2 when 10 >= sellin > 5', function (): void {
+            const gildedRose = new GildedRose([
+                new Item('Backstage passes to a TAFKAL80ETC concert', 10, 20),
+                new Item('Backstage passes to a TAFKAL80ETC concert', 6, 20),
+            ])
+            const updatedItems = gildedRose.updateQuality()
+
+            expect(updatedItems[0].quality).to.equal(22)
+            expect(updatedItems[1].quality).to.equal(22)
+        })
+
+        it('should increase quality by 5 when 0 < sellin <= 5', function (): void {
+            const gildedRose = new GildedRose([
+                new Item('Backstage passes to a TAFKAL80ETC concert', 5, 20),
+                new Item('Backstage passes to a TAFKAL80ETC concert', 1, 20),
+            ])
+            const updatedItems = gildedRose.updateQuality()
+
+            expect(updatedItems[0].quality).to.equal(23)
+            expect(updatedItems[1].quality).to.equal(23)
+        })
+
+        it('should set quality to 0 when sellin <= 0', function (): void {
+            const gildedRose = new GildedRose([
+                new Item('Backstage passes to a TAFKAL80ETC concert', 0, 20),
+                new Item('Backstage passes to a TAFKAL80ETC concert', -1, 20),
+            ])
+            const updatedItems = gildedRose.updateQuality()
+
+            expect(updatedItems[0].quality).to.equal(0)
+            expect(updatedItems[1].quality).to.equal(0)
+        })
+    })
+
     it('should have the original tests pass (golden-master-text-test)', function (): void {
         const items = [
             new Item('+5 Dexterity Vest', 10, 20),
