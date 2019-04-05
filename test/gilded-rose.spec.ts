@@ -4,6 +4,13 @@ import { expect } from 'chai'
 import { Item, GildedRose } from '../app/gilded-rose'
 
 describe('Gilded Rose', function (): void {
+    it('should degrade quality twice as fast, once the sell by date has passed', function (): void {
+        const gildedRose = new GildedRose([new Item('generic item', 0, 20)])
+        const updatedItems = gildedRose.updateQuality()
+
+        expect(updatedItems[0].quality).to.equal(18)
+    })
+
     it('should have the original tests pass (golden-master-text-test)', function (): void {
         const items = [
             new Item('+5 Dexterity Vest', 10, 20),
