@@ -29,7 +29,8 @@
             "ObjectPattern": { "minProperties": 8, "multiline": true, "consistent": true },
             "ImportDeclaration": { "minProperties": 8, "multiline": true, "consistent": true },
             "ExportDeclaration": { "minProperties": 8, "multiline": true, "consistent": true }
-        }]
+        }],
+        "import/named": "off"
     },
     "globals": {
         "describe": false,

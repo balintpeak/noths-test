@@ -1,12 +1,10 @@
-import { expect } from 'chai';
-import { Item, GildedRose } from '../app/gilded-rose';
+/* eslint-disable func-names, prefer-arrow-callback */
 
-describe('Gilded Rose', function () {
+import { expect } from 'chai'
+import { Item, GildedRose } from '../app/gilded-rose'
 
-    it('should foo', function() {
-        const gildedRose = new GildedRose([ new Item('foo', 0, 0) ]);
-        const items = gildedRose.updateQuality();
-        expect(items[0].name).to.equal('fixme');
-    });
-
-});
+describe('Gilded Rose', function (): void {
+    it('should have at least one test', function (): void {
+        expect(true).to.equal(true)
+    })
+})
