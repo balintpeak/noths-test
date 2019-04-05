@@ -42,11 +42,20 @@ describe('Gilded Rose', function (): void {
         })
     })
 
-    it('should increase quality of "Aged Brie"', function (): void {
-        const gildedRose = new GildedRose([new Item('Aged Brie', 10, 20)])
-        const updatedItems = gildedRose.updateQuality()
+    describe('Aged Brie', function (): void {
+        it('should increase quality', function (): void {
+            const gildedRose = new GildedRose([new Item('Aged Brie', 10, 20)])
+            const updatedItems = gildedRose.updateQuality()
 
-        expect(updatedItems[0].quality).to.equal(21)
+            expect(updatedItems[0].quality).to.equal(21)
+        })
+
+        it('should not have quality above 50', function (): void {
+            const gildedRose = new GildedRose([new Item('Aged Brie', 10, 50)])
+            const updatedItems = gildedRose.updateQuality()
+
+            expect(updatedItems[0].quality).to.equal(50)
+        })
     })
 
     it('should never increase quality above 50', function (): void {
