@@ -36,9 +36,11 @@ export class GildedRose {
     }
 
     public static updateGenericQuality (sellIn: number, quality: number): number {
-        const qualityDelta = sellIn >= 0 ? -1 : -2
+        const delta = sellIn >= 0 ? -1 : -2
+        const updatedQuality = quality + delta
 
-        return GildedRose.getValidQuality(quality + qualityDelta)
+        return GildedRose.getValidQuality(updatedQuality)
+    }
     }
 
     public static updateQualityForItem (item: Item): Item {
