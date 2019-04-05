@@ -1,0 +1,38 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": "./tsconfig.json",
+      "tsconfigRootDir": "."
+    },
+    "env": {
+      "node": true
+    },
+    "plugins": ["@typescript-eslint"],
+    "extends": [
+        "airbnb-base",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:import/typescript"
+    ],
+    "rules": {
+        "comma-dangle": ["error", "always-multiline"],
+        "space-before-function-paren": ["error", "always"],
+        "semi": ["error", "never"],
+        "indent": ["error", 4, { "SwitchCase": 1 }],
+        "max-len": ["error", { "code": 180, "comments": 200 }],
+        "padding-line-between-statements": ["error",
+            { "blankLine": "always", "prev": "*", "next": "return" },
+            { "blankLine": "always", "prev": "*", "next": "class" }
+        ],
+        "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
+        "object-curly-newline": ["error", {
+            "ObjectExpression": { "minProperties": 8, "multiline": true, "consistent": true },
+            "ObjectPattern": { "minProperties": 8, "multiline": true, "consistent": true },
+            "ImportDeclaration": { "minProperties": 8, "multiline": true, "consistent": true },
+            "ExportDeclaration": { "minProperties": 8, "multiline": true, "consistent": true }
+        }]
+    },
+    "globals": {
+        "describe": false,
+        "it": false
+    }
+}

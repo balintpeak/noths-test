@@ -14,13 +14,18 @@
     "@types/chai": "~3.5.2",
     "@types/mocha": "~2.2.41",
     "@types/node": "~7.0.18",
+    "@typescript-eslint/eslint-plugin": "^1.6.0",
+    "@typescript-eslint/parser": "^1.6.0",
     "chai": "~3.5.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
     "mocha": "~3.2.0",
     "nyc": "~11.0.3",
     "rimraf": "~2.5.2",
     "source-map-support": "0.5.9",
     "ts-node": "~3.1.0",
-    "typescript": "~3.0.3"
+    "typescript": "^3.4.1"
   },
   "nyc": {
     "extension": [
@@ -39,4 +44,3 @@
     ]
   }
 }
-
