@@ -107,7 +107,7 @@ describe('Gilded Rose', function (): void {
             expect(updatedItems[1].quality).to.equal(22)
         })
 
-        it('should increase quality by 5 when 0 < sellin <= 5', function (): void {
+        it('should increase quality by 3 when 0 < sellin <= 5', function (): void {
             const gildedRose = new GildedRose([
                 new Item('Backstage passes to a TAFKAL80ETC concert', 5, 20),
                 new Item('Backstage passes to a TAFKAL80ETC concert', 1, 20),
