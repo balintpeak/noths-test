@@ -17,11 +17,11 @@ export class GildedRose {
         this.items = items
     }
 
-    public static updateSellIn (sellIn: number): number {
+    private static updateSellIn (sellIn: number): number {
         return sellIn - 1
     }
 
-    public static getValidQuality (quality: number): number {
+    private static getValidQuality (quality: number): number {
         let validQuality = quality
 
         if (validQuality < 0) {
@@ -33,20 +33,20 @@ export class GildedRose {
         return validQuality
     }
 
-    public static updateGenericQuality (sellIn: number, quality: number): number {
+    private static updateGenericQuality (sellIn: number, quality: number): number {
         const delta = sellIn >= 0 ? -1 : -2
         const updatedQuality = quality + delta
 
         return GildedRose.getValidQuality(updatedQuality)
     }
 
-    public static updateAgedBrieQuality (quality: number): number {
+    private static updateAgedBrieQuality (quality: number): number {
         const updatedQuality = quality + 1
 
         return GildedRose.getValidQuality(updatedQuality)
     }
 
-    public static updateBackstagePassQuality (sellIn: number, quality: number): number {
+    private static updateBackstagePassQuality (sellIn: number, quality: number): number {
         let updatedQuality = quality + 1
 
         if (sellIn < 0) {
@@ -60,7 +60,7 @@ export class GildedRose {
         return GildedRose.getValidQuality(updatedQuality)
     }
 
-    public static updateQualityForItem (item: Item): Item {
+    private static updateQualityForItem (item: Item): Item {
         let { sellIn, quality } = item
 
         if (!item.name.includes('Sulfuras')) {
