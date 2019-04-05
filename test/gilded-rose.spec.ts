@@ -34,24 +34,24 @@ describe('Gilded Rose', function (): void {
 
     describe('Sulfuras', function (): void {
         it('should not change quality when sellin is positive', function (): void {
-            const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', 10, 20)])
+            const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', 10, 80)])
             const updatedItems = gildedRose.updateQuality()
 
-            expect(updatedItems[0].quality).to.equal(20)
+            expect(updatedItems[0].quality).to.equal(80)
         })
 
         it('should not change quality when sellin is zero', function (): void {
-            const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', 0, 20)])
+            const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', 0, 80)])
             const updatedItems = gildedRose.updateQuality()
 
-            expect(updatedItems[0].quality).to.equal(20)
+            expect(updatedItems[0].quality).to.equal(80)
         })
 
         it('should not change quality when sellin is negative', function (): void {
-            const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', -1, 20)])
+            const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', -1, 80)])
             const updatedItems = gildedRose.updateQuality()
 
-            expect(updatedItems[0].quality).to.equal(20)
+            expect(updatedItems[0].quality).to.equal(80)
         })
     })
 
