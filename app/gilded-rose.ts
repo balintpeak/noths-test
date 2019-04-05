@@ -17,48 +17,47 @@ export class GildedRose {
         this.items = items
     }
 
-    public updateQuality (): Item[] {
-        for (let i = 0; i < this.items.length; i += 1) {
-            if (this.items[i].name !== 'Aged Brie' && this.items[i].name !== 'Backstage passes to a TAFKAL80ETC concert') {
-                if (this.items[i].quality > 0) {
-                    if (this.items[i].name !== 'Sulfuras, Hand of Ragnaros') {
-                        this.items[i].quality = this.items[i].quality - 1
-                    }
-                }
-            } else if (this.items[i].quality < 50) {
-                this.items[i].quality = this.items[i].quality + 1
-                if (this.items[i].name === 'Backstage passes to a TAFKAL80ETC concert') {
-                    if (this.items[i].sellIn < 11) {
-                        if (this.items[i].quality < 50) {
-                            this.items[i].quality = this.items[i].quality + 1
-                        }
-                    }
-                    if (this.items[i].sellIn < 6) {
-                        if (this.items[i].quality < 50) {
-                            this.items[i].quality = this.items[i].quality + 1
-                        }
-                    }
-                }
-            }
-            if (this.items[i].name !== 'Sulfuras, Hand of Ragnaros') {
-                this.items[i].sellIn = this.items[i].sellIn - 1
-            }
-            if (this.items[i].sellIn < 0) {
-                if (this.items[i].name !== 'Aged Brie') {
-                    if (this.items[i].name !== 'Backstage passes to a TAFKAL80ETC concert') {
-                        if (this.items[i].quality > 0) {
-                            if (this.items[i].name !== 'Sulfuras, Hand of Ragnaros') {
-                                this.items[i].quality = this.items[i].quality - 1
-                            }
-                        }
-                    } else {
-                        this.items[i].quality = this.items[i].quality - this.items[i].quality
-                    }
-                } else if (this.items[i].quality < 50) {
-                    this.items[i].quality = this.items[i].quality + 1
-                }
-            }
+    public static updateSellIn (sellIn: number): number {
+        return sellIn - 1
+    }
+
+    public static getValidQuality (quality: number): number {
+        let validQuality = quality
+
+        if (validQuality < 0) {
+            validQuality = 0
         }
+
+        if (validQuality > 50) {
+            validQuality = 50
+        }
+
+        return validQuality
+    }
+
+    public static updateGenericQuality (sellIn: number, quality: number): number {
+        const qualityDelta = sellIn >= 0 ? -1 : -2
+
+        return GildedRose.getValidQuality(quality + qualityDelta)
+    }
+
+    public static updateQualityForItem (item: Item): Item {
+        let { sellIn, quality } = item
+
+        if (!item.name.includes('Sulfuras')) {
+            sellIn = GildedRose.updateSellIn(sellIn)
+            quality = GildedRose.updateGenericQuality(sellIn, quality)
+        }
+
+        return ({
+            name: item.name,
+            sellIn,
+            quality,
+        })
+    }
+
+    public updateQuality (): Item[] {
+        this.items = this.items.map((item): Item => GildedRose.updateQualityForItem(item))
 
         return this.items
     }
