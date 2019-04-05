@@ -48,6 +48,20 @@ export class GildedRose {
         return GildedRose.getValidQuality(updatedQuality)
     }
 
+    public static updateBackstagePassQuality (sellIn: number, quality: number): number {
+        let updatedQuality = quality + 1
+
+        if (sellIn < 0) {
+            updatedQuality = 0
+        } else if (sellIn >= 5 && sellIn < 10) {
+            updatedQuality = quality + 2
+        } else if (sellIn >= 0 && sellIn < 5) {
+            updatedQuality = quality + 3
+        }
+
+        return GildedRose.getValidQuality(updatedQuality)
+    }
+
     public static updateQualityForItem (item: Item): Item {
         let { sellIn, quality } = item
 
@@ -56,6 +70,8 @@ export class GildedRose {
 
             if (item.name.includes('Aged Brie')) {
                 quality = GildedRose.updateAgedBrieQuality(quality)
+            } else if (item.name.includes('Backstage pass')) {
+                quality = GildedRose.updateBackstagePassQuality(sellIn, quality)
             } else {
                 quality = GildedRose.updateGenericQuality(sellIn, quality)
             }
