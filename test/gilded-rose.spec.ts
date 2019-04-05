@@ -25,6 +25,13 @@ describe('Gilded Rose', function (): void {
         expect(updatedItems[0].quality).to.equal(21)
     })
 
+    it('should never increase quality above 50', function (): void {
+        const gildedRose = new GildedRose([new Item('Aged Brie', 10, 50)])
+        const updatedItems = gildedRose.updateQuality()
+
+        expect(updatedItems[0].quality).to.equal(50)
+    })
+
     it('should have the original tests pass (golden-master-text-test)', function (): void {
         const items = [
             new Item('+5 Dexterity Vest', 10, 20),
