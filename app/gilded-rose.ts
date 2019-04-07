@@ -13,6 +13,9 @@ export class Item {
 export class GildedRose {
     private items: Item[]
 
+    private static GENERIC_QUALITY_DECREASE_BY = 1
+    private static GENERIC_QUALITY_DECREASE_BY_EXPIRED = 2
+
     public constructor (items = [] as Item[]) {
         this.items = items
     }
@@ -33,8 +36,8 @@ export class GildedRose {
         return validQuality
     }
 
-    private static updateGenericQuality (sellIn: number, quality: number): number {
-        const delta = sellIn >= 0 ? -1 : -2
+    private static updateGenericQuality (sellIn: number, quality: number, decreaseBySellable: number = GildedRose.GENERIC_QUALITY_DECREASE_BY, decreaseByExpired: number = GildedRose.GENERIC_QUALITY_DECREASE_BY_EXPIRED): number {
+        const delta = sellIn >= 0 ? -decreaseBySellable : -decreaseByExpired
         const updatedQuality = quality + delta
 
         return GildedRose.getValidQuality(updatedQuality)
@@ -60,6 +63,10 @@ export class GildedRose {
         return GildedRose.getValidQuality(updatedQuality)
     }
 
+    private static updateConjuredQuality (sellIn: number, quality: number): number {
+        return GildedRose.updateGenericQuality(sellIn, quality, GildedRose.GENERIC_QUALITY_DECREASE_BY * 2, GildedRose.GENERIC_QUALITY_DECREASE_BY_EXPIRED * 2)
+    }
+
     private static updateQualityForItem (item: Item): Item {
         let { sellIn, quality } = item
 
@@ -70,6 +77,8 @@ export class GildedRose {
                 quality = GildedRose.updateAgedBrieQuality(quality)
             } else if (item.name.includes('Backstage pass')) {
                 quality = GildedRose.updateBackstagePassQuality(sellIn, quality)
+            } else if (item.name.includes('Conjured')) {
+                quality = GildedRose.updateConjuredQuality(sellIn, quality)
             } else {
                 quality = GildedRose.updateGenericQuality(sellIn, quality)
             }
