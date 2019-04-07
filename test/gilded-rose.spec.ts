@@ -53,6 +53,18 @@ describe('Gilded Rose', function (): void {
 
     describe('Aged Brie', function (): void {
         const itemName = 'Aged Brie'
+
+        it('should decrease sellin by one', function (): void {
+            const gildedRose = new GildedRose([
+                new Item(itemName, 1, 20),
+                new Item(itemName, 0, 20),
+            ])
+            const updatedItems = gildedRose.updateQuality()
+
+            expect(updatedItems[0].sellIn).to.equal(0)
+            expect(updatedItems[1].sellIn).to.equal(-1)
+        })
+
         it('should increase quality', function (): void {
             const gildedRose = new GildedRose([new Item(itemName, 10, 20)])
             const updatedItems = gildedRose.updateQuality()
@@ -70,6 +82,14 @@ describe('Gilded Rose', function (): void {
 
     describe('Sulfuras', function (): void {
         const itemName = 'Sulfuras, Hand of Ragnaros'
+
+        it('should not change sellin', function (): void {
+            const gildedRose = new GildedRose([new Item(itemName, 10, 80)])
+            const updatedItems = gildedRose.updateQuality()
+
+            expect(updatedItems[0].sellIn).to.equal(10)
+        })
+
         it('should not change quality when sellin is positive', function (): void {
             const gildedRose = new GildedRose([new Item(itemName, 10, 80)])
             const updatedItems = gildedRose.updateQuality()
@@ -93,6 +113,19 @@ describe('Gilded Rose', function (): void {
     })
 
     describe('Backstage passes', function (): void {
+        const itemName = 'Backstage passes to a TAFKAL80ETC concert'
+
+        it('should decrease sellin by one', function (): void {
+            const gildedRose = new GildedRose([
+                new Item(itemName, 1, 20),
+                new Item(itemName, 0, 20),
+            ])
+            const updatedItems = gildedRose.updateQuality()
+
+            expect(updatedItems[0].sellIn).to.equal(0)
+            expect(updatedItems[1].sellIn).to.equal(-1)
+        })
+
         it('should increase quality by 1 when sellin is bigger than 10', function (): void {
             const gildedRose = new GildedRose([new Item(itemName, 11, 20)])
             const updatedItems = gildedRose.updateQuality()
