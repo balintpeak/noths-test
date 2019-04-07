@@ -170,4 +170,48 @@ describe('Gilded Rose', function (): void {
             expect(updatedItems[1].quality).to.equal(0)
         })
     })
+
+    describe('Conjured items', function (): void {
+        const itemName = 'Conjured Mana Cake'
+
+        it('should decrease sellin by one', function (): void {
+            const gildedRose = new GildedRose([
+                new Item(itemName, 1, 20),
+                new Item(itemName, 0, 20),
+            ])
+            const updatedItems = gildedRose.updateQuality()
+
+            expect(updatedItems[0].sellIn).to.equal(0)
+            expect(updatedItems[1].sellIn).to.equal(-1)
+        })
+
+        it('should decrease in quality by 2 when sellin is positive', function (): void {
+            const gildedRose = new GildedRose([
+                new Item(itemName, 10, 20),
+                new Item(itemName, 1, 20),
+            ])
+            const updatedItems = gildedRose.updateQuality()
+
+            expect(updatedItems[0].quality).to.equal(18)
+            expect(updatedItems[1].quality).to.equal(18)
+        })
+
+        it('should decrease in quality by 4 when sellin is negative', function (): void {
+            const gildedRose = new GildedRose([
+                new Item(itemName, 0, 20),
+                new Item(itemName, -1, 20),
+            ])
+            const updatedItems = gildedRose.updateQuality()
+
+            expect(updatedItems[0].quality).to.equal(16)
+            expect(updatedItems[1].quality).to.equal(16)
+        })
+
+        it('should not have negative quality', function (): void {
+            const gildedRose = new GildedRose([new Item(itemName, 10, 0)])
+            const updatedItems = gildedRose.updateQuality()
+
+            expect(updatedItems[0].quality).to.equal(0)
+        })
+    })
 })
