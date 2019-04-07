@@ -4,6 +4,13 @@ import { expect } from 'chai'
 import { Item, GildedRose } from '../app/gilded-rose'
 
 describe('Gilded Rose', function (): void {
+    it('should work with no arguments', function (): void {
+        const gildedRose = new GildedRose()
+        const updatedItems = gildedRose.updateQuality()
+
+        expect(updatedItems.length).to.equal(0)
+    })
+
     describe('Generic item', function (): void {
         it('should decrease sellin by one', function (): void {
             const gildedRose = new GildedRose([
